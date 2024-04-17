@@ -28,7 +28,7 @@ export const moveFileInstance =
     const destinationPathIsAlreadyTaken = await exists(verifiedDestinationPath);
 
     if (destinationPathIsAlreadyTaken) {
-      throw new Error(`"${verifiedDestinationPath}" is already taken.`);
+      await removeFile(verifiedDestinationPath);
     }
 
     const destinationFilename = path.basename(verifiedDestinationPath);

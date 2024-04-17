@@ -43,12 +43,14 @@ describe('moveFile Function', () => {
       await expect(moveFile('file.txt', 'test/test.txt')).rejects.toThrow('"root/test" directory does not exist.');
     });
 
-    it('should throw an error when the destination point is already taken', async () => {
+    it('should not throw an error when the destination point is already taken', async () => {
       await writeFile('file.txt', 'file content');
+      await writeFile('file2.txt', 'file content2');
 
-      await expect(moveFile('file.txt', 'directory_as_a_file_1')).rejects.toThrow(
-        '"root/directory_as_a_file_1" is already taken.',
-      );
+      await expect(moveFile('file.txt', 'file2.txt')).resolves.not.toThrow();
+      expect(await readFile('file2.txt')).toEqual('file content');
+
+      expect(await exists('file.txt')).toEqual(false);
     });
   });
 

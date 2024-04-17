@@ -21,7 +21,7 @@ export const renameFileInstance =
     const newFullPathIsAlreadyTaken = await exists(newFullPath);
 
     if (newFullPathIsAlreadyTaken) {
-      throw new Error(`"${newFullPath}" is already taken.`);
+      await removeFile(newFullPath);
     }
 
     const updatedFileDetails = await updateFileDetails<TData>(verifiedFullPath, {

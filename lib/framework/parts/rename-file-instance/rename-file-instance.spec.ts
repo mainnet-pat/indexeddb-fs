@@ -2,7 +2,7 @@ import { createFs } from '@framework/create-fs.function';
 
 import { functionImportTest } from '@utils';
 
-const { exists, removeFile, renameFile, writeFile } = createFs({
+const { exists, readFile, removeFile, renameFile, writeFile } = createFs({
   databaseVersion: 1,
   rootDirectoryName: 'root',
   databaseName: 'renameFile',
@@ -24,12 +24,15 @@ describe('renameFile Function', () => {
     await expect(renameFile('root', 'root')).rejects.toThrow('"root" is not a file.');
   });
 
-  it('should throw an error when new filename is already taken', async () => {
+  it('should not throw an error when new filename is already taken', async () => {
     await writeFile('file.txt', 'content');
+    await writeFile('file2.txt', 'content2');
 
-    await expect(renameFile('file.txt', 'file.txt')).rejects.toThrow('"root/file.txt" is already taken.');
+    await expect(renameFile('file.txt', 'file2.txt')).resolves.not.toThrow();
+    expect(await readFile('file2.txt')).toEqual('content');
 
-    await removeFile('file.txt');
+    expect(await exists('file.txt')).toEqual(false);
+    await removeFile('file2.txt');
   });
 
   it('should return renamed file on success', async () => {
