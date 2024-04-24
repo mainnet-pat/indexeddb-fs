@@ -208,6 +208,7 @@ export const createFs = ({
     rename: withRootDirectoryCheck(renameFile),
     renameFile: withRootDirectoryCheck(renameFile),
     removeFile: withRootDirectoryCheck(removeFile),
+    unlink: withRootDirectoryCheck(removeFile),
     fileDetails: withRootDirectoryCheck(fileDetails),
     isDirectory: withRootDirectoryCheck(isDirectory),
     readDirectory: withRootDirectoryCheck(readDirectory),

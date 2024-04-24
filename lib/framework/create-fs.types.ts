@@ -30,6 +30,7 @@ export interface ICreateFsOutput {
   remove: (fullPath: string) => Promise<void>;
   removeDirectory: (fullPath: string) => Promise<void>;
   removeFile: (fullPath: string) => Promise<void>;
+  unlink: (fullPath: string) => Promise<void>;
   rename: <TData = unknown>(fullPath: string, newFilename: string) => Promise<IFileEntry<TData>>;
   renameFile: <TData = unknown>(fullPath: string, newFilename: string) => Promise<IFileEntry<TData>>;
   rootDirectoryName: string;

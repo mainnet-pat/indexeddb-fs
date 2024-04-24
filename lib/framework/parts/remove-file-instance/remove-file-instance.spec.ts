@@ -2,7 +2,7 @@ import { createFs } from '@framework/create-fs.function';
 
 import { functionImportTest } from '@utils';
 
-const { createDirectory, exists, removeFile, writeFile } = createFs({
+const { createDirectory, exists, removeFile, writeFile, unlink } = createFs({
   databaseVersion: 1,
   rootDirectoryName: 'root',
   databaseName: 'removeFile',
@@ -35,6 +35,13 @@ describe('removeFile Function', () => {
     await writeFile('file1.txt', 'test content');
 
     await removeFile('file1.txt');
+    await expect(exists('file1.txt')).resolves.toBeFalsy();
+  });
+
+  it('should remove with unlink', async () => {
+    await writeFile('file1.txt', 'test content');
+
+    await unlink('file1.txt');
     await expect(exists('file1.txt')).resolves.toBeFalsy();
   });
 });
