@@ -4,6 +4,8 @@ const fs = createFs();
 
 export default fs;
 
+export { fs as promises };
+
 export { IFileEntry, IDirectoryEntry } from '@types';
 
 export { ICreateFsProps, ICreateFsOutput } from '@framework/create-fs.types';

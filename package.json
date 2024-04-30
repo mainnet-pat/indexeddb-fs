@@ -1,6 +1,6 @@
 {
   "name": "@mainnet-pat/indexeddb-fs",
-  "version": "2.1.6",
+  "version": "2.1.7",
   "description": "An 'fs' kind of library dedicated to the browser",
   "license": "MIT",
   "author": "Paweł Wojtasiński",
